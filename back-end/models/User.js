@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: { isEmail: true },
       },
       password: { type: DataTypes.STRING },
-      googleId: { type: DataTypes.STRING },
+      google_id: { type: DataTypes.STRING },
       name: { type: DataTypes.STRING },
     },
     {
