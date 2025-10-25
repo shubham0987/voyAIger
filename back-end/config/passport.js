@@ -27,9 +27,10 @@ passport.use(
         if (!user && email) {
           user = await User.findOne({ where: { email } });
         }
+        console.log("Google OAuth profile:", profile);
 
         if (user) {
-          user.googleId = profile.id;
+          user.google_id = profile.id;
           user.name = user.name || profile.displayName;
           await user.save();
           return done(null, user);
