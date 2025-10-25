@@ -1,0 +1,15 @@
+## Node / environment
+node_modules/
+.env
+.env.*.local
+.env.local
+
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-workspace
+
+
+# Certificates (keep local CA files out of repo)
+/certs/
