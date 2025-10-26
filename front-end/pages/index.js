@@ -1,4 +1,6 @@
-// Redirect root to /login by default
+// Redirect root to the configured home page
+import { PAGES } from "../lib/routes";
+
 export default function Home() {
   return null;
 }
@@ -6,7 +8,7 @@ export default function Home() {
 export async function getServerSideProps() {
   return {
     redirect: {
-      destination: "/home",
+      destination: PAGES.HOME,
       permanent: false,
     },
   };
