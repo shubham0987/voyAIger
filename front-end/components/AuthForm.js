@@ -11,6 +11,21 @@ export default function AuthForm({ mode = "login" }) {
 
   const backend = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
 
+  // log token query param (if present) once on the client
+  useState(() => {
+    if (typeof window === "undefined") return false;
+    const token = new URLSearchParams(window.location.search).get("token");
+    const user_name = new URLSearchParams(window.location.search).get(
+      "user_name"
+    );
+    if (token) {
+      localStorage.setItem("voyAIger_token", token);
+      localStorage.setItem("voyAIger_user_name", user_name);
+      setTimeout(() => router.push("/home"), 650);
+    }
+    return true;
+  });
+
   async function submit(e) {
     e.preventDefault();
     setLoading(true);
