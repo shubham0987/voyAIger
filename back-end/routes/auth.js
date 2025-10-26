@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { User } = require("../models");
+const { v4: uuidv4 } = require("uuid");  
+
 
 const router = express.Router();
 
@@ -11,7 +13,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 function signToken(user) {
   // Sequelize uses `id` as primary key
-  return jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+  return jwt.sign({ userid: user.userid }, JWT_SECRET, {
     expiresIn: "7d",
   });
 }
@@ -29,13 +31,14 @@ router.post("/register", async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-
-    const user = await User.create({ email, password: hash, name });
+    const userid = uuidv4()
+    const user = await User.create({ email, password: hash, name, userid });
 
     const token = signToken(user);
+    
     res.json({
       token,
-      user: { id: user.id, email: user.email, name: user.name },
+      user: { id: userid, name: user.name },
     });
   } catch (err) {
     console.error(err);
@@ -65,7 +68,7 @@ router.get(
     if (req.query.raw === "1") {
       return res.json({
         token,
-        user: { id: req.user.id, email: req.user.email, name: req.user.name },
+        user: { id: req.user.userid, name: req.user.name },
       });
     }
     res.redirect(redirectTo);
@@ -93,7 +96,7 @@ router.post("/login", async (req, res) => {
     const token = signToken(user);
     res.json({
       token,
-      user: { id: user.id, email: user.email, name: user.name },
+      user: { id: user.userid, name: user.name },
     });
   } catch (err) {
     console.error(err);
