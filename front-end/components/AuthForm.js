@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { PAGES, API } from "../lib/routes";
 
 export default function AuthForm({ mode = "login" }) {
   const [email, setEmail] = useState("");
@@ -9,17 +10,27 @@ export default function AuthForm({ mode = "login" }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const backend = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  // log token query param (if present) once on the client
+  useState(() => {
+    if (typeof window === "undefined") return false;
+    const token = new URLSearchParams(window.location.search).get("token");
+    const user_name = new URLSearchParams(window.location.search).get(
+      "user_name"
+    );
+    if (token) {
+      localStorage.setItem("voyAIger_token", token);
+      localStorage.setItem("voyAIger_user_name", user_name);
+      setTimeout(() => router.push(PAGES.HOME), 650);
+    }
+    return true;
+  });
 
   async function submit(e) {
     e.preventDefault();
     setLoading(true);
     setMessage(null);
     try {
-      const url =
-        mode === "register"
-          ? `${backend}/api/auth/register`
-          : `${backend}/api/auth/login`;
+      const url = mode === "register" ? API.AUTH_REGISTER : API.AUTH_LOGIN;
       const body =
         mode === "register" ? { email, password, name } : { email, password };
       const res = await fetch(url, {
@@ -54,7 +65,7 @@ export default function AuthForm({ mode = "login" }) {
       }
 
       setMessage({ type: "success", text: "Welcome! Redirecting..." });
-      setTimeout(() => router.push("/home"), 350);
+      setTimeout(() => router.push(PAGES.HOME), 350);
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     } finally {
@@ -62,7 +73,7 @@ export default function AuthForm({ mode = "login" }) {
     }
   }
 
-  const googleUrl = `${backend}/api/auth/google`;
+  const googleUrl = API.AUTH_GOOGLE;
 
   return (
     <div className="max-w-xl mx-auto mt-12">
@@ -208,14 +219,17 @@ export default function AuthForm({ mode = "login" }) {
             {mode === "register" ? (
               <p>
                 Already have an account?{" "}
-                <a href="/login" className="text-indigo-600 font-medium">
+                <a href={PAGES.LOGIN} className="text-indigo-600 font-medium">
                   Sign in
                 </a>
               </p>
             ) : (
               <p>
                 New here?{" "}
-                <a href="/register" className="text-indigo-600 font-medium">
+                <a
+                  href={PAGES.REGISTER}
+                  className="text-indigo-600 font-medium"
+                >
                   Create an account
                 </a>
               </p>

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { PAGES } from "../lib/routes";
 
 export default function Header() {
   const [name, setName] = useState(null);
@@ -50,14 +51,14 @@ export default function Header() {
     } catch (e) {}
     setName(null);
     setMenuOpen(false);
-    router.push("/login");
+    router.push(PAGES.HOME);
   }
 
   return (
     <header className="w-full bg-white/60 backdrop-blur sticky top-0 z-30 border-b">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Link href="/">
+          <Link href={PAGES.INDEX}>
             <a className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-teal-400 flex items-center justify-center text-white font-bold">
                 V
@@ -97,7 +98,7 @@ export default function Header() {
               {menuOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md py-1 z-40">
                   <a
-                    href="/settings"
+                    href={PAGES.SETTINGS}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                   >
                     Settings
@@ -113,10 +114,10 @@ export default function Header() {
             </div>
           ) : (
             <>
-              <Link href="/login">
+              <Link href={PAGES.LOGIN}>
                 <a className="text-sm text-indigo-600">Login</a>
               </Link>
-              <Link href="/register">
+              <Link href={PAGES.REGISTER}>
                 <a className="text-sm text-gray-600">Register</a>
               </Link>
             </>

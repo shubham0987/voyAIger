@@ -3,8 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { User } = require("../models");
-const { v4: uuidv4 } = require("uuid");  
-
+const { v4: uuidv4 } = require("uuid");
 
 const router = express.Router();
 
@@ -31,11 +30,11 @@ router.post("/register", async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    const userid = uuidv4()
+    const userid = uuidv4();
     const user = await User.create({ email, password: hash, name, userid });
 
     const token = signToken(user);
-    
+
     res.json({
       token,
       user: { id: userid, name: user.name },
@@ -63,7 +62,7 @@ router.get(
     // Successful authentication; generate JWT and redirect or respond
     const token = signToken(req.user);
     // If a frontend is set, redirect with token as query param
-    const redirectTo = `${FRONTEND_URL}?token=${token}`;
+    const redirectTo = `${FRONTEND_URL}?token=${token}&user_name=${req.user.name}`;
     // For API clients, prefer JSON when `?raw=1` is set
     if (req.query.raw === "1") {
       return res.json({
