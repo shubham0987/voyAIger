@@ -80,7 +80,7 @@ export default function AuthForm({ mode = "login" }) {
       <div className="card flex flex-col md:flex-row items-center gap-6">
         <div className="w-full md:w-1/2 text-center p-4">
           <h2 className="text-3xl font-bold mb-2 brand-grad">voyAIger</h2>
-          <p className="text-sm text-gray-600">
+          <p className="text-xs text-gray-600">
             Join the travel community. Share itineraries, photos and tips.
           </p>
           <div className="mt-4">
@@ -114,7 +114,7 @@ export default function AuthForm({ mode = "login" }) {
           <form onSubmit={submit} className="space-y-4">
             {mode === "register" && (
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-xs font-medium text-gray-700">
                   Name
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
@@ -129,7 +129,7 @@ export default function AuthForm({ mode = "login" }) {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 Email
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
@@ -144,7 +144,7 @@ export default function AuthForm({ mode = "login" }) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-gray-700">
                 Password
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
@@ -215,7 +215,7 @@ export default function AuthForm({ mode = "login" }) {
             </div>
           )}
 
-          <div className="mt-4 text-sm text-gray-600">
+          <div className="mt-4 text-xs text-gray-600">
             {mode === "register" ? (
               <p>
                 Already have an account?{" "}

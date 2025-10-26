@@ -56,7 +56,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-white/60 backdrop-blur sticky top-0 z-30 border-b">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link href={PAGES.INDEX}>
             <a className="flex items-center gap-3">
@@ -77,8 +77,8 @@ export default function Header() {
                 aria-haspopup="true"
                 aria-expanded={menuOpen}
               >
-                <span className="text-sm text-gray-700">Welcome,</span>
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-xs text-gray-700">Welcome,</span>
+                <span className="text-xs font-medium text-gray-900">
                   {name}
                 </span>
                 <svg
@@ -99,13 +99,13 @@ export default function Header() {
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md py-1 z-40">
                   <a
                     href={PAGES.SETTINGS}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-50"
                   >
                     Settings
                   </a>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50"
+                    className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-gray-50"
                   >
                     Logout
                   </button>
@@ -115,10 +115,10 @@ export default function Header() {
           ) : (
             <>
               <Link href={PAGES.LOGIN}>
-                <a className="text-sm text-indigo-600">Login</a>
+                <a className="text-xs text-indigo-600">Login</a>
               </Link>
               <Link href={PAGES.REGISTER}>
-                <a className="text-sm text-gray-600">Register</a>
+                <a className="text-xs text-gray-600">Register</a>
               </Link>
             </>
           )}
