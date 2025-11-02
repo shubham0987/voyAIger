@@ -37,6 +37,9 @@ const { sequelize } = require("./models");
 require("./config/passport");
 
 const authRoutes = require("./routes/auth");
+const followsRoutes = require("./routes/follows");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -52,6 +55,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/follows", followsRoutes);
+
+// Swagger UI (API docs)
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Connect to Postgres via Sequelize
 async function start() {
