@@ -54,20 +54,28 @@ export default function Header() {
     router.push(PAGES.HOME);
   }
 
+  const firstInitial = name ? name.charAt(0).toUpperCase() : "";
+
   return (
     <header className="w-full bg-white/60 backdrop-blur sticky top-0 z-30 border-b">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link href={PAGES.INDEX}>
-            <a className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-teal-400 flex items-center justify-center text-white font-bold">
-                V
+            <a className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-teal-400 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
+                <span className="material-symbols-outlined text-xl">
+                  travel_explore
+                </span>
               </div>
-              <div className="text-lg font-semibold">voyAIger</div>
+
+              <div className="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+                voy
+                <span className="text-indigo-600 dark:text-indigo-400">AI</span>
+                ger
+              </div>
             </a>
           </Link>
         </div>
-
         <div className="flex items-center gap-4">
           {name ? (
             <div className="relative" ref={menuRef}>
@@ -78,35 +86,35 @@ export default function Header() {
                 aria-expanded={menuOpen}
               >
                 <span className="text-xs text-gray-700">Welcome,</span>
-                <span className="text-xs font-medium text-gray-900">
-                  {name}
-                </span>
-                <svg
-                  className="w-4 h-4 text-gray-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
+                <div
+                  className="flex items-center justify-center rounded-full size-8 
+                   bg-primary/20 text-primary dark:bg-primary/30 dark:text-primary-light 
+                   font-bold text-sm flex-shrink-0"
+                  aria-label={`Avatar for ${name}`}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                  {firstInitial}
+                </div>
               </button>
 
               {menuOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md py-1 z-40">
                   <a
                     href={PAGES.SETTINGS}
-                    className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-50"
+                    className="flex items-center gap-2 px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 transition-colors duration-100"
                   >
+                    <span className="material-symbols-outlined text-sm">
+                      settings
+                    </span>
                     Settings
                   </a>
+
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-gray-50"
+                    className="w-full text-left flex items-center gap-2 px-4 py-2 text-xs text-red-600 hover:bg-gray-100 transition-colors duration-100"
                   >
+                    <span className="material-symbols-outlined text-sm">
+                      logout
+                    </span>
                     Logout
                   </button>
                 </div>
