@@ -32,7 +32,7 @@ export default function HomePage() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         <section className="mb-8">
           <div className="rounded-lg p-8 bg-gradient-to-r from-indigo-50 to-teal-50 border">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2">
+            <h1 className="text-base sm:text-lg md:text-3xl font-bold mb-2">
               Discover journeys — connect with fellow travelers
             </h1>
             <p className="text-gray-700">
@@ -49,19 +49,19 @@ export default function HomePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold mb-4">Community feed</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4">Community feed</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {samplePosts.map((p) => (
               <article
                 key={p.id}
                 className="bg-white rounded-lg p-4 shadow-sm border"
               >
-                <div className="text-sm text-gray-500">{p.user}</div>
+                <div className="text-xs text-gray-500">{p.user}</div>
                 <h3 className="font-semibold mt-2">{p.title}</h3>
-                <p className="mt-2 text-gray-600 text-sm">{p.excerpt}</p>
+                <p className="mt-2 text-gray-600 text-xs">{p.excerpt}</p>
                 <div className="mt-4 flex items-center justify-between">
                   <div className="text-xs text-gray-500">2 comments</div>
-                  <button className="text-indigo-600 text-sm">Read</button>
+                  <button className="text-indigo-600 text-xs">Read</button>
                 </div>
               </article>
             ))}
