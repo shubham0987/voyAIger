@@ -65,9 +65,15 @@ if (databaseUrl) {
 
 // Import models
 const User = require("./User")(sequelize, DataTypes);
+const Follower = require("./Follower")(sequelize, DataTypes);
+
+// Define simple associations (optional convenience)
+User.hasMany(Follower, { foreignKey: "follower_id", as: "followingRelations" });
+User.hasMany(Follower, { foreignKey: "following_id", as: "followerRelations" });
 
 module.exports = {
   sequelize,
   Sequelize,
   User,
+  Follower,
 };
